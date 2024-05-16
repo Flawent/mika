@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;1,500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lora', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, 'Great Vibes';
+            margin: 0;
+            padding: 0;
+            background-color: #fae1e7;
+        }
+        
+        header {
+            background-color: #ffc1cc;
+            color: #4a4a4a;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-family: 'Great Vibes', cursive;
+        }
+        
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+        
+        header nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+        
+        header nav ul li a {
+            color: #4a4a4a;
+            text-decoration: none;
+            font-family: 'Lora', serif;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        header nav ul li a:hover {
+            background-color: #4a4a4a;
+            color: #ffc1cc;
+            border-radius: 5px;
+        }
+        
+        .products {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .products .row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .product {
+            background-color: #ffd9e0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ffd9e0;
+            
+        }
+        
+        .product h2 {
+            margin: 10px 0;
+            font-family: 'Great Vibes', cursive;
+        }
+        
+        .product p {
+            color: #666;
+            font-family: 'Lora', serif;
+        }
+        
+        .product .price {
+            font-size: 1.2em;
+            color: #333;
+            font-family: 'Lora', serif;
+        }
+        
+        .product button {
+            background-color: #ffc1cc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Lora', serif;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 5px;
+        }
+        
+        .product button:hover {
+            background-color: #4a4a4a;
+            transform: scale(1.05);
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            background-color: #ffc1cc;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-family: 'EB Garamond', serif;
+        }
+        
+        body {
+            min-height: 400px;
+            margin-bottom: 100px;
+            clear: both;
+        }
+        
+        .image-hover {
+            width: 300px;
+            height: 200px;
+            background-image: url('default-image.jpg');
+            background-size: cover;
+            transition: background-image 0.5s ease-in-out;
+        }
+        
+        .image-hover:hover {
+            background-image: url('hover-image.jpg');
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.5s;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 10px;
+            animation: slideIn 0.5s;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel img {
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        
+
+        .carousel-button:hover {
+            background-color: #ff9ab3;
+        }
+
+        .product-size {
+            margin: 10px 0;
+        }
+
+        .product-size select {
+            padding: 5px;
+            font-family: 'EB Garamond', serif;
+        }
+
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffb9c4;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'EB Garamond', serif;
+            transition: transform 0.3s ease;
+        }
+
+        .cart.hidden {
+            transform: translateY(-100%);
+        }
+
+        .cart ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart ul li {
+            margin: 10px 0;
+        }
+
+        .cart-toggle {
+            background-color: #ff9ab3;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: 'EB Garamond', serif;
+            position: fixed;
+            top: 0;
+            right: 0;
+            border-radius: 0 0 0 5px;
+        }
+        
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIKA</title>
+</head>
+<body>
+    <header>
+        <img src="image.png" width="330" height="150">
+        <nav>
+            <ul>
+                <li><a href="mikaaboutmain.html">Головна</a></li>
+                <li><a href="index.html">Товари</a></li>
+                <li><a href="mikacontact.html">Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="products">
+            <div class="row">
+                <div class="product">
+                    <img src="tualetnaya_voda_zhenskaya_antonio_banderas_blue_seduction_edt_50_ml~1266~1481.png" height="400" width="300">
+                    <h2>Antonio Banderas Blue Seduction</h2>
+                    <p>Приємний літній аромат свіжості та моря.</p>
+                    <span class="price">700 UAH</span>
+                    <br><br>
+                    <button  onclick="openModal(1)">Додати в кошик</button>
+                </div>
+                <div class="product">
+                    <img src="8011003993826_1.png" height="400" width="300">
+                    <h2>Versace Bright Crystal</h2>
+                    <p>Дуже ніжний та легкий аромат.</p>
+                    <span class="price">2100 UAH</span>
+                    <br><br>
+                    <button  onclick="openModal(2)">Додати в кошик</button>
+                </div>
+                <div class="product">
+                    <img src="angel-schlesser-essential-1000x1000.png" height="400" width="300">
+                    <h2>Angel Schlesser Essential</h2>
+                    <p>Аромат весни та свіжості.</p>
+                    <span class="price">1760 UAH</span>
+                    <br><br>
+                    <button  onclick="openModal(3)">Додати в кошик</button>
+                </div>
+                <div class="product">
+                    <img src="375x500.988.png" height="400" width="300">
+                    <h2>Lanvin Eclat d'Arpege</h2>
+                    <p>Легкий, ніжний, та безпосередній аромат. </p>
+                    <span class="price">1200 UAH</span>
+                    <br><br>
+                    <button  onclick="openModal(4)">Додати в кошик</button>
+                </div>
+
+
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal(1)">&times;</span>
+                        
+                            <img src="tualetnaya_voda_zhenskaya_antonio_banderas_blue_seduction_edt_50_ml~1266~1481.png" height="400" width="350">
+                            
+                            
+                        
+                        
+                        <h2>Antonio Banderas Blue Seduction</h2>
+                        <p>Спокушання, чуттєвість і вишуканість. Вона наповнює цим атмосферу. Вона трепетно ​​замінює напругу ніжністю. Легкість та непередбачуваність – ось її супутники. Вона насолоджується кожною миттю. А всі насолоджуються нею, вдихаючи Blue Seduction.</p>
+                        <div class="product-size">
+                            <label for="size1">об'єм флакона:</label>
+                            <select id="size1">
+                                <option value="50ml">50ml</option>
+                                <option value="100ml">100ml</option>
+                                <option value="200ml">200ml</option>
+                                
+                            </select>
+                        </div>
+                        <span class="price">700 UAH</span>
+                        <br><br>
+                        <button style="background-color: #ff9ab3; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; border: none;" onclick="addToCart(1, 'Antonio Banderas Blue Seduction', 700, 'UAH', document.getElementById('size1').value)">Додати до кошику</button>
+                    </div>
+                </div>
+            
+                <div id="modal2" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal(2)">&times;</span>
+                        
+                        <img src="8011003993826_1.png" height="300" width="300">
+                        
+                        
+                        <h2>Versace Bright Crystal</h2>
+                        <p>Її ніжність не зрівняється навіть із торканням найдорожчих тканин. Її жіночність переможе навіть найпотужнішу силу. Її легкість і невимушеність може затьмарити найяскравіші події. А її легкий аромат обеззброє навіть найагресивніших супротивників. З нею справжня сила – у слабкості.</p>
+                        <div class="product-size">
+                            <label for="size2">об'єм флакона:</label>
+                            <select id="size2">
+                                <option value="50ml">50ml</option>
+                                <option value="100ml">100ml</option>
+                                <option value="200ml">200ml</option>
+                            </select>
+                        </div>
+                        <span class="price">2100 UAH</span>
+                        <br><br>
+                        <button style="background-color: #ff9ab3; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; border: none;" onclick="addToCart(2, 'Versace Bright Crystal', 2100, 'UAH', document.getElementById('size2').value)">Додати до кошику</button>
+                    </div>
+                </div>
+            
+                <div id="modal3" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal(3)">&times;</span>
+                        <img src="angel-schlesser-essential-1000x1000.png" height="300" width="300">
+                        
+                        <h2>Angel Schlesser Essential</h2>
+                        <p>Надзвичайно жіночний, чуттєвий і при цьому дуже стриманий – саме так можна охарактеризувати аромат Angel Schlesser Essential. Цей витончений та благородний аромат буде доречний у будь-якій ситуації – в офісі, на прогулянці з друзями чи на побаченні. Жінка, оповита ароматом Angel Schlesser Essential, точно не залишиться непоміченою оточуючими.</p>
+                        <div class="product-size">
+                            <label for="size3">об'єм флакона:</label>
+                            <select id="size3">
+                                <option value="50ml">50ml</option>
+                                <option value="100ml">100ml</option>
+                                <option value="200ml">200ml</option>
+                            </select>
+                        </div>
+                        <span class="price">1760 UAH</span>
+                        <br><br>
+                        <button style="background-color: #ff9ab3; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; border: none;" onclick="addToCart(3, 'Angel Schlesser Essential', 1760, 'UAH', document.getElementById('size3').value)">Додати до кошику</button>
+                    </div>
+                </div>
+            
+                <div id="modal4" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal(4)">&times;</span>
+                        <img src="375x500.988.png" height="400" width="300">
+                        
+                        <h2>Lanvin Eclat d'Arpege</h2>
+                        <p>Це втілення легкості, ніжності та безпосередності. Яскравий і світлий, як кохання з першого погляду, як тепла та сонячна весна, сповнена свіжості та безтурботності, — парфумована вода Eclat d’Arpege.</p>
+                        <div class="product-size">
+                            <label for="size4">об'єм флакона:</label>
+                            <select id="size4">
+                                <option value="50ml">50ml</option>
+                                <option value="100ml">100ml</option>
+                                <option value="200ml">200ml</option>
+                            </select>
+                        </div>
+                        <span class="price">1200 UAH</span>
+                        <br><br>
+                        <button style="background-color: #ff9ab3; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; border: none;" onclick="addToCart(4, 'Lanvin Eclat d`Arpege', 1200, 'UAH', document.getElementById('size4').value)">Додати до кошику</button>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MIKA store. Всі права захищені.</p>
+    </footer>
+    <div id="cart" class="cart">
+        <center>
+        <p style="font-size: 20px;">Кошик</p>
+    
+        <ul id="cart-items"></ul>
+        <button style="background-color: #ff9ab3; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; border: none;" onclick="checkout()">Оформити замовлення</button>
+    </center>
+    </div>
+    <button class="cart-toggle" onclick="toggleCart()">Кошик</button>
+    <script>
+        let cart = [];
+
+        function openModal(modalId) {
+            document.getElementById('modal' + modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById('modal' + modalId).style.display = "none";
+        }
+
+        function addToCart(id, name, price, currency, size) {
+            cart.push({id, name, price, currency, size});
+            updateCart();
+            closeModal(id);
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - ${item.size} - ${item.price} ${item.currency}`;
+                cartItems.appendChild(li);
+            });
+        }
+
+        function checkout() {
+            if (cart.length > 0) {
+                alert('Замовлення оформлено!');
+                cart = [];
+                updateCart();
+            } else {
+                alert('Ваш кошик порожній!');
+            }
+        }
+
+        function prevSlide(modalId) {
+            // Implement carousel previous slide functionality here
+        }
+
+        function nextSlide(modalId) {
+            // Implement carousel next slide functionality here
+        }
+         function toggleCart() {
+        const cart = document.getElementById('cart');
+        cart.classList.toggle('hidden');
+    }
+    </script>
+</body>
+</html>
+
